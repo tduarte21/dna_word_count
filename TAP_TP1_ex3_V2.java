@@ -540,29 +540,16 @@ class CountWords extends Thread {
     public void run() {
 
     	try{
-
-    		//for (Map.Entry<String, Integer> entry : wordMap.entrySet()) {
-			//System.out.println(entry.getKey());
-			//}
-
 	    	StringBuilder sb = new StringBuilder();
 
 	    	List<Future<Boolean>> futs = new ArrayList<Future<Boolean>>();
 	    	long startTime = System.nanoTime();
 
 	    	dnaFileLength = (int) new File(FilenameDNA).length();
-			//dnaFileByteArray = new byte[dnaFileLength];
 
 			BufferedReader br = new BufferedReader(new FileReader(FilenameDNA));
 			StringBuffer builder = new StringBuffer();
-			String line = br.readLine();
-			//byte rmN = "N".getBytes()[0];
-			//byte rmBrk = "\n".getBytes()[0];
-			char rmN = 'N';
-			char rmBrk = '\n';
-			char rmM = 'M';
-			//int rmN = (int)N.charValue();
-			//int rmBrk = (int)_N.charValue();
+			String line = br.readLine(); //First line is header
 
 			if(line.contains(">")){
 				int nextChar;
@@ -606,39 +593,5 @@ class CountWords extends Thread {
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}
-
-	   	/*
-		* ALTERNATIVE IMPLEMENTATION (Slower)
-		
-		int wordLength_1=wordLength-1;
-		int size = wordMap.size();
-    	for (int i=0; i<dnaFileLength; i++) {
-    		StringBuffer word = new StringBuffer();
-    		for (int n=0; n<wordLength_1; n++) {
-    			word.append(dnaFileByteArray[n+i]);
-    		}
-    		String strWord = word.toString();
-			for (int k=0; k<size; k++) {
-			//for (Map.Entry<byte[], Integer> entry : wordMap.entrySet()) {
-
-				char[] wordCharArray = words.get(k);
-				for (int j=0; j<wordLength; j++) {
-					if(dnaFileByteArray[i+j]==wordCharArray[j]){
-						if (j==wordLength_1) {
-							wordMap.put(wordCharArray, wordMap.get(wordCharArray) + 1);
-						}
-					}
-					else{
-						break;
-					}
-						
-				}
-
-			}
-
-		}
-		
-		*/
-
     }
 }
